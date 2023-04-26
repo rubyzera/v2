@@ -1,0 +1,21 @@
+<html lang="pt-BR">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="create-blog content">
+    <form action="/blogs" method="POST">
+      <label for="numero">Número da comanda</label>
+      <input type="text" id="numero" name="numero" required>
+      <label for="itens">Itens do pedido</label>
+      <textarea id="itens" name="itens" required></textarea>
+      <label for="valor">Valor da comanda</label>
+      <input type="text" id="valor" name="valor" required>      
+      <button>Enviar</button>
+    </form>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

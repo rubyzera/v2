@@ -1,0 +1,604 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Teko - Gerenciamento de Botecos",
+    "description": "API para a aplicação web de gerenciamento de botecos",
+    "contact": {
+      "email": "f.rabello@aluno.ifsp.edu.br"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "teko"
+    }
+  ],
+  "tags": [
+    {
+      "name": "comandas",
+      "description": "Gerenciar comandas",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "estoque",
+      "description": "Controle de estoque de produtos",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "usuario",
+      "description": "Edição de multiplos usuários"
+    }
+  ],
+  "paths": {
+    "/comandas": {
+      "put": {
+        "tags": [
+          "comandas"
+        ],
+        "summary": "Cria uma comanda",
+        "description": "Registra uma comanda usando um id único",
+        "operationId": "criarComando",
+        "requestBody": {
+          "description": "Registrar comanda",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/models/comandas"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/models/comandas"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Comanda não encontrada"
+          },
+          "405": {
+            "description": "Erro na validação"
+          }
+        },
+        "security": [
+          {
+            "teko_auth": [
+              "write:comandas",
+              "read:comandas"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "comandas"
+        ],
+        "summary": "Lista todas as comandas",
+        "description": "Exibe todas as comandas existentes",
+        "operationId": "listarComandas",
+        "requestBody": {
+          "description": "Listar as comandas",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/models/comandas"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/models/comandas"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/models/comandas"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Entrada inválida"
+          }
+        },
+        "security": [
+          {
+            "teko_auth": [
+              "write:comandas",
+              "read:comandas"
+            ]
+          }
+        ]
+      }
+    },
+    "/comandas/buscarComanda": {
+      "get": {
+        "tags": [
+          "comandas"
+        ],
+        "summary": "Busca uma comanda",
+        "description": "Insira um ID para buscar a comanda",
+        "operationId": "buscarComanda",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Número de ID a ser filtrado",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": "available",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/models/comandas"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/models/comandas"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID inválido"
+          }
+        },
+        "security": [
+          {
+            "teko_auth": [
+              "write:comandas",
+              "read:comandas"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "comandas"
+        ],
+        "summary": "Deleta uma comanda",
+        "description": "exclui uma comanda existente",
+        "operationId": "deletarComanda",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idComanda",
+            "in": "path",
+            "description": "Id da comanda para deletar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido"
+          }
+        },
+        "security": [
+          {
+            "teko_auth": [
+              "write:comandas",
+              "read:comandas"
+            ]
+          }
+        ]
+      }
+    },
+    "/estoque": {
+      "get": {
+        "tags": [
+          "estoque"
+        ],
+        "summary": "Retorna informações sobre o estoque",
+        "description": "Exibe os produtos no estoque",
+        "operationId": "exibirEstoque",
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/estoque/adicionar": {
+      "post": {
+        "tags": [
+          "estoque"
+        ],
+        "summary": "Adiciona um item no estoque",
+        "description": "Coloca qualquer item no estoque",
+        "operationId": "adicionarEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/estoque"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/models/estoque"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/models/estoque"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/models/estoque"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Entrada inválida"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "estoque"
+        ],
+        "summary": "Exclui um item do estoque",
+        "description": "Use Ids válidos para excluir os items",
+        "operationId": "excluirEstoque",
+        "parameters": [
+          {
+            "name": "idItem",
+            "in": "path",
+            "description": "ID do item a ser excluído",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido"
+          },
+          "404": {
+            "description": "Item não encontrado"
+          }
+        }
+      }
+    },
+    "/usuario": {
+      "post": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Criar usuário",
+        "description": "Só pode ser usado a partir do login de administrador",
+        "operationId": "criarUsuário",
+        "requestBody": {
+          "description": "Parâmetros de usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/models/func"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/models/func"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuario/login": {
+      "get": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Entra no sistema como usuário",
+        "description": "",
+        "operationId": "logarUsuario",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "query",
+            "description": "Nome de usuário",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "senha",
+            "in": "query",
+            "description": "Senha do usuário",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operação bem-sucedida",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário ou senha inválido"
+          }
+        }
+      }
+    },
+    "/usuario/logout": {
+      "get": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Desloga um usuário",
+        "description": "",
+        "operationId": "deslogarUsuraio",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "operação bem-sucedida"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Atualiza um usuário",
+        "description": "Só pode ser usado por um administrador logado",
+        "operationId": "atualizarUsuario",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "path",
+            "description": "usuario a ser atualizado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Atualiza um usuário existente",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/models/func"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "operação bem-sucedida"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Deleta um usuário do sistema",
+        "description": "Sò pode ser usado por um administrador logado",
+        "operationId": "deletarUsuario",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "path",
+            "description": "Nome de usuário a ser deletado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Usuário inválido"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Estoque": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "nome": {
+            "type": "string",
+            "example": "batata"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "example": 7
+          },
+          "dataValidade": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "xml": {
+          "name": "order"
+        }
+      },
+      "Usuário": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 100000
+          },
+          "usuario": {
+            "type": "string",
+            "example": "juninho"
+          },
+          "senha": {
+            "type": "password"
+          }
+        }
+      }
+    }
+  }
+}
