@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const comandaSchema = new Schema({
+const ComandaSchema = new Schema({
   numero: {
     type: Number,
     required: true,
@@ -16,5 +16,5 @@ const comandaSchema = new Schema({
   },
 }, { timestamps: true });
 
-const Comanda = mongoose.model('Comanda', comandaSchema);
+const Comanda = mongoose.model('Comanda', ComandaSchema);
 module.exports = Comanda;

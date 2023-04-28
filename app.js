@@ -2,10 +2,10 @@ const express = require('express'); //Declarando a dependência do app "express"
 const morgan = require('morgan'); //Declarando a dependência do app "morgan"
 const mongoose = require('mongoose');  //Declarando a dependência do app "mongoose"
 const Blog = require('./models/comandas', '/models/func'); //Apontando os bancos de dados utilizados para a aplicação
-
+const ComandaListRoutes = require('./routes/api/comandas')
 const app = express(); //Utilizando o app "express"
 
-const dbURI = 'mongodb+srv://fabiocr6:mCMsUGFxZF1am2Ze@cluster0.urt2d8b.mongodb.net/node-test?retryWrites=true&w=majority'; //Autenticação com o banco de dados na nuvem
+const dbURI = 'mongodb+srv://admin:admin@teko.gqpmipd.mongodb.net/?retryWrites=true&w=majority+srv://fabiocr6:mCMsUGFxZF1am2Ze@cluster0.urt2d8b.mongodb.net/node-test?retryWrites=true&w=majority'; //Autenticação com o banco de dados na nuvem
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) //Conexão e inicialização do banco de dados na aplicação
   .then(result => app.listen(3000)) //Especificando a porta na qual o endereço da aplicação será utilizada
@@ -24,6 +24,9 @@ app.use((req, res, next) => {
 });
 
 // routes
+app.use('/api/comandaList', ComandaListRoutes)
+
+
 app.get('/', (req, res) => {
   res.redirect('/blogs');
 });
