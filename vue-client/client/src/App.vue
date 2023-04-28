@@ -1,6 +1,10 @@
 <template>
   <div class="main">
    <h3>Listagem de comandas</h3>
+   <nav>
+   <router-link to="/estoque">Estoque</router-link>
+   </nav>
+   <router-view/>
  
    <form class="form" >
      <input class="input" v-model="numero" type="text" name="numero" placeholder="Escreva o numero da comanda" />
@@ -18,7 +22,7 @@
          <span class="comanda-numero">{{ comanda.numero }}</span>
          <span class="comanda-valor">{{ comanda.valor }}</span>
        </div>
-         <button class="delete-btn" @click="removeComanda(comanda, i)">DELETE COMANDA</button>
+         <button class="delete-btn" @click="removeComanda(comanda, i)">DELETAR COMANDA</button>
        </li>
      </ul>
    </div>
@@ -31,25 +35,25 @@ export default {
   name: "App",
   data() {
     return {
-      todos: [],
-      description: "",
-      title: "",
+      comandas: [],
+      numero: "",
+      valor: "",
     };
   },
   async mounted() {
     const response = await axios.get("api/comandaList/");
-    this.todos = response.data;
+    this.comandas = response.data;
   },
   methods: {
     async addComanda(e) {
       e.preventDefault();
       const response = await axios.post("api/comandaList/", {
-        title: this.title,
-        description: this.description
+        numero: this.numero,
+        valor: this.valor
       });
       this.comandas.push(response.data);
-      this.title = "";
-      this.description = "";
+      this.numero = "";
+      this.valor = "";
     },
     async removeComanda(item, i) {
       await axios.delete("api/comandaList/" + item._id);
@@ -136,5 +140,8 @@ export default {
   padding: 10px;
   cursor: pointer;
   border: none;
+}
+nav {
+  padding: 100px;
 }
 </style>
