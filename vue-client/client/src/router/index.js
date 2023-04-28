@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import estoque from '../views/estoque.vue'
-//import TodoDetail from '../views/TodoDetail.vue'
+import Vue from 'vue'
+
+Vue.use(VueRouter)
+
+
 
 const routes = [
   {
@@ -14,7 +18,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/estoque.vue')
+    component: () => import(/* webpackChunkName: "about" */ '/views/estoque.vue')
   }
 ]
 

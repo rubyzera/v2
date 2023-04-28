@@ -1,4 +1,9 @@
 <template>
+  <div id="app">
+    <br>
+    <nav-esq></nav-esq>
+    <router-view/>
+  </div>
   <div class="main">
    <h3>Listagem de comandas</h3>
    <nav>
@@ -30,6 +35,7 @@
  </template>
 
 <script>
+
 import axios from "axios";
 export default {
   name: "App",
