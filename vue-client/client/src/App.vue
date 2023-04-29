@@ -25,6 +25,7 @@
        <li v-for="(comanda, i) in comandas" :key="comanda._id">
          <div class="comanda">
          <span class="comanda-numero">{{ comanda.numero }}</span>
+         <span class="comanda-itens">{{  comanda.itens }}</span>
          <span class="comanda-valor">{{ comanda.valor }}</span>
        </div>
          <button class="delete-btn" @click="removeComanda(comanda, i)">DELETAR COMANDA</button>
@@ -37,12 +38,18 @@
 <script>
 
 import axios from "axios";
+import NavEsq from "./components/NavEsq.vue";
+
+axios.defaults.baseURL = 'http://localhost:3000/';
+
 export default {
   name: "App",
+  components:{NavEsq},
   data() {
     return {
       comandas: [],
       numero: "",
+      itens: "",
       valor: "",
     };
   },
@@ -55,11 +62,13 @@ export default {
       e.preventDefault();
       const response = await axios.post("api/comandaList/", {
         numero: this.numero,
-        valor: this.valor
+        valor: this.valor,
+        itens: this.itens
       });
       this.comandas.push(response.data);
       this.numero = "";
       this.valor = "";
+      this.itens = "";
     },
     async removeComanda(item, i) {
       await axios.delete("api/comandaList/" + item._id);

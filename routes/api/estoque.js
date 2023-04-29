@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const Estoque = require('../../models/comandas')
+const Estoque = require('../../models/estoque')
 
 const router = Router()
 

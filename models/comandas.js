@@ -16,5 +16,5 @@ const ComandaSchema = new Schema({
   },
 }, { timestamps: true });
 
-const Comanda = mongoose.model('Comanda', ComandaSchema);
+const Comanda = mongoose.model('comanda', ComandaSchema);
 module.exports = Comanda;
