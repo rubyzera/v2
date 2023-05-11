@@ -6,6 +6,18 @@ const cors = require('cors')
 const ComandaListRoutes = require('./routes/api/comandas');
 const bodyParser = require('body-parser');
 const app = express(); //Utilizando o app "express"
+const comandasql = require("./models/comandasql");
+const estoquesql = require("./models/estoquesql");
+const funcsql = require("./models/funcsql");
+const model = {};
+model.comandasql = comandasql;
+module.exports = model;
+model.estoquesql = estoquesql;
+module.exports = model;
+model.funcsql = funcsql;
+module.exports = model;
+// const rotaComanda = require("./routes/api/comandasql");
+
 
 
 // const dbURI = 'mongodb+srv://admin:admin@teko.gqpmipd.mongodb.net/?retryWrites=true&w=majority+srv://fabiocr6:mCMsUGFxZF1am2Ze@cluster0.urt2d8b.mongodb.net/node-test?retryWrites=true&w=majority'; //Autenticação com o banco de dados na nuvem
@@ -18,6 +30,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) //C
 app.set('view engine', 'ejs'); //Utilizando o app "ejs"
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static('public')); //Declarando a pasta "public" como fonte de arquivos estáticos
 app.use(express.urlencoded({ extended: true })); //Utilizando a função de rotas do express
 app.use(morgan('dev'));  //Utilizando o app "morgan"
@@ -107,3 +120,5 @@ app.delete('/blogs/:id', (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
+
+module.exports = app;
