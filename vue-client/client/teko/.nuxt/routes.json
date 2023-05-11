@@ -1,0 +1,16 @@
+[
+  {
+    "name": "estoque",
+    "path": "/estoque",
+    "component": "C:\\\\Users\\\\fabio\\\\Documents\\\\Teko\\\\v2\\\\vue-client\\\\client\\\\teko\\\\pages\\\\estoque.vue",
+    "chunkName": "pages/estoque",
+    "_name": "_35d22bd6"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\fabio\\\\Documents\\\\Teko\\\\v2\\\\vue-client\\\\client\\\\teko\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_742c50af"
+  }
+]
