@@ -4,6 +4,7 @@ const mongoose = require('mongoose');  //Declarando a dependência do app "mongo
 const Blog = require('./models/comandas', '/models/func'); //Apontando os bancos de dados utilizados para a aplicação
 const cors = require('cors')
 const ComandaListRoutes = require('./routes/api/comandas');
+const EstoqueListRoutes = require('./routes/api/estoque');
 const bodyParser = require('body-parser');
 const app = express(); //Utilizando o app "express"
 const comandasql = require("./models/comandasql");
@@ -51,6 +52,7 @@ app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
+app.use('/api/estoqueList', EstoqueListRoutes)
 
 app.get('/comandas/abrir', (req, res) => {
   res.render('create', { title: 'Abrir uma nova comanda' });

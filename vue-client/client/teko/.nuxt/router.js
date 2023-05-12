@@ -5,6 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _35d22bd6 = () => interopDefault(import('..\\pages\\estoque.vue' /* webpackChunkName: "pages/estoque" */))
+const _5fbf4877 = () => interopDefault(import('..\\pages\\func.vue' /* webpackChunkName: "pages/func" */))
 const _742c50af = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -22,6 +23,10 @@ export const routerOptions = {
     path: "/estoque",
     component: _35d22bd6,
     name: "estoque"
+  }, {
+    path: "/func",
+    component: _5fbf4877,
+    name: "func"
   }, {
     path: "/",
     component: _742c50af,

@@ -3,12 +3,21 @@
     "name": "estoque",
     "path": "/estoque",
     "component": "C:\\\\Users\\\\fabio\\\\Documents\\\\Teko\\\\v2\\\\vue-client\\\\client\\\\teko\\\\pages\\\\estoque.vue",
-    "chunkName": "pages/estoque"
+    "chunkName": "pages/estoque",
+    "_name": "_35d22bd6"
+  },
+  {
+    "name": "func",
+    "path": "/func",
+    "component": "C:\\\\Users\\\\fabio\\\\Documents\\\\Teko\\\\v2\\\\vue-client\\\\client\\\\teko\\\\pages\\\\func.vue",
+    "chunkName": "pages/func",
+    "_name": "_5fbf4877"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\fabio\\\\Documents\\\\Teko\\\\v2\\\\vue-client\\\\client\\\\teko\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_742c50af"
   }
 ]

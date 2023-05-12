@@ -4,14 +4,16 @@
     
   </div> -->
   <div class="main">
-   <h3>Controle de Estoque</h3>
-   <nuxt-link to="/">Comandas</nuxt-link>
+    Usuário Logado
+    <b-avatar></b-avatar>
+   <h3>Controle de Estoque</h3>   
    <form class="form" >
      <input class="input" v-model="nome" type="text" name="nome" placeholder="Nome do Item" />
      <br />
      <input class="input" v-model="quantidade" type="text" name="quantidade"  placeholder="Quantidade" />
      <br />
-     <button class="submit-button" @click="addEstoque">Adicionar ao estoque</button>
+     <b-button v-b-modal.modal-sm variant="outline-primary" @click="addEstoque">Adicionar ao estoque</b-button>
+     <b-modal id="modal-sm" size="sm" title="Sucesso">Item adicionado ao estoque</b-modal>
    </form>
    <div class="estoque-container">
      <ul>
@@ -20,7 +22,7 @@
          <span class="estoque-nome">{{ estoque.nome }}</span>
          <span class="estoque-quantidade">{{  estoque.quantidade }}</span>
        </div>
-         <button class="delete-btn" @click="removeEstoque(estoque, i)">Remover do Estoque</button>
+         <!-- <button class="delete-btn" @click="removeEstoque(estoque, i)">Remover do Estoque</button> -->
        </li>
      </ul>
    </div>
@@ -39,16 +41,20 @@ export default {
   name: "App",
   data() {
     return {
-      estoques: [],
+      estoques: [{
+        nome:"",
+        quantidade:""
+      }],
+      
       nome: "",
       quantidade: "",
     };
   },
-  async mounted() {
-    const response = await this.$axios.$get("api/estoqueList/");
-    console.log(response);
-    this.estoques = response;
-  },
+  // async mounted() {
+  //   const response = await this.$axios.$get("api/estoqueList/");
+  //   console.log(response);
+  //   this.estoques = response;
+  // },
   methods: {
     async addEstoque(e) {
       e.preventDefault();
