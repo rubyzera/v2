@@ -10,6 +10,10 @@ const app = express(); //Utilizando o app "express"
 const comandasql = require("./models/comandasql");
 const estoquesql = require("./models/estoquesql");
 const funcsql = require("./models/funcsql");
+const database = require("./sqlite");
+const Comanda = require("./comanda");
+const Funcionario = require("./funcionario");
+const Estoque = require("./estoque");
 const model = {};
 model.comandasql = comandasql;
 module.exports = model;
@@ -17,6 +21,15 @@ model.estoquesql = estoquesql;
 module.exports = model;
 model.funcsql = funcsql;
 module.exports = model;
+(async () => {
+try {
+  const resultado = await database.sync();
+  console.log(resultado);
+} catch (error) {
+  console.log(error);
+}
+
+})();
 // const rotaComanda = require("./routes/api/comandasql");
 
 
@@ -48,9 +61,6 @@ app.get('/', (req, res) => {
   res.redirect('/blogs');
 });
 
-app.get('/about', (req, res) => {
-  res.render('about', { title: 'About' });
-});
 
 app.use('/api/estoqueList', EstoqueListRoutes)
 
@@ -62,17 +72,11 @@ app.get('/func/func', (req, res) => {
   res.render('registrofunc', { title: 'Registrar Funcionário' });
 });
 
-app.get('/blogs/registropessoasti', (req, res) => {
-  res.render('registropessoasti', { title: 'Registrar pessoas que já trabalham com TI' });
-});
 
 app.get('/func/login', (req, res) => {
   res.render('loginfunc', { title: 'Login para Funcionários' });
 });
 
-app.get('/loginpessoasti', (req, res) => {
-  res.render('loginpessoasti', { title: 'Login para profissionais' });
-});
 
 app.get('/blogs', (req, res) => {
   Blog.find().sort({ createdAt: -1 })
