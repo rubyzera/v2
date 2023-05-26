@@ -1,20 +1,19 @@
 const Sequelize = require('sequelize');
-const database = require('./sqlite');
+const database = require('../sqlite');
 
-const Estoque = database.define('estoque', {
-    id: {
+const Comanda = database.define('comanda', {
+    numero: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
+    itens: {
+        type: Sequelize.STRING
     },
-    preco: {
+    valor: {
         type: Sequelize.DOUBLE
     }
 })
 
-module.exports = Estoque;
+module.exports = Comanda;

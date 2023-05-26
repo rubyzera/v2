@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('./sqlite');
+const database = require('../sqlite');
 
 const Funcionario = database.define('funcionario', {
     nome: {

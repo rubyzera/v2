@@ -1,17 +1,10 @@
 const { Router } = require('express')
-const Comanda = require('../../models/comandas')
+const Comanda = require('../../models/comanda')
 
 const router = Router()
 
 router.get('/', async (req, res) => {
     try {
-        // const comandaList = await Comanda.find()
-        // const newComanda = new Comanda({
-        //     numero: "2",
-        //     itens: "teste",
-        //     valor: 99.9
-        // })
-        // const comanda = await newComanda.save()
         const comandaList = await Comanda.findOne({
             numero: 2
         });

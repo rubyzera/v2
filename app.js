@@ -1,26 +1,14 @@
 const express = require('express'); //Declarando a dependência do app "express"
 const morgan = require('morgan'); //Declarando a dependência do app "morgan"
 const mongoose = require('mongoose');  //Declarando a dependência do app "mongoose"
-const Blog = require('./models/comandas', '/models/func'); //Apontando os bancos de dados utilizados para a aplicação
+const Blog = require('./models/comanda', './models/funcionario', './models/estoque'); //Apontando os bancos de dados utilizados para a aplicação
 const cors = require('cors')
-const ComandaListRoutes = require('./routes/api/comandas');
+const ComandaListRoutes = require('./routes/api/comanda');
 const EstoqueListRoutes = require('./routes/api/estoque');
+const FuncionarioListRoutes = require('./routes/api/funcionario');
 const bodyParser = require('body-parser');
 const app = express(); //Utilizando o app "express"
-const comandasql = require("./models/comandasql");
-const estoquesql = require("./models/estoquesql");
-const funcsql = require("./models/funcsql");
 const database = require("./sqlite");
-const Comanda = require("./comanda");
-const Funcionario = require("./funcionario");
-const Estoque = require("./estoque");
-const model = {};
-model.comandasql = comandasql;
-module.exports = model;
-model.estoquesql = estoquesql;
-module.exports = model;
-model.funcsql = funcsql;
-module.exports = model;
 (async () => {
 try {
   const resultado = await database.sync();
@@ -30,11 +18,6 @@ try {
 }
 
 })();
-// const rotaComanda = require("./routes/api/comandasql");
-
-
-
-// const dbURI = 'mongodb+srv://admin:admin@teko.gqpmipd.mongodb.net/?retryWrites=true&w=majority+srv://fabiocr6:mCMsUGFxZF1am2Ze@cluster0.urt2d8b.mongodb.net/node-test?retryWrites=true&w=majority'; //Autenticação com o banco de dados na nuvem
 const dbURI = 'mongodb+srv://admin:admin@teko.gqpmipd.mongodb.net/TekoDB'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) //Conexão e inicialização do banco de dados na aplicação
   .then(result => app.listen(4000)) //Especificando a porta na qual o endereço da aplicação será utilizada
@@ -53,15 +36,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// routes
+// rotas
 app.use('/api/comandaList', ComandaListRoutes)
-
-
-app.get('/', (req, res) => {
-  res.redirect('/blogs');
-});
-
-
+app.use('/api/funcionarioList,', FuncionarioListRoutes)
 app.use('/api/estoqueList', EstoqueListRoutes)
 
 app.get('/comandas/abrir', (req, res) => {
@@ -78,15 +55,6 @@ app.get('/func/login', (req, res) => {
 });
 
 
-app.get('/blogs', (req, res) => {
-  Blog.find().sort({ createdAt: -1 })
-    .then(result => {
-      res.render('index', { blogs: result, title: 'Listagem de Comandas' });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
 
 app.post('/func/func', (req, res) => {
   const func = new func(req.body);
@@ -94,29 +62,6 @@ app.post('/func/func', (req, res) => {
   func.save()
     .then(result => {
       res.redirect('/func/login');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-app.get('/blogs/:id', (req, res) => {
-  const id = req.params.id;
-  Blog.findById(id)
-    .then(result => {
-      res.render('details', { blog: result, title: 'Blog Details' });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-app.delete('/blogs/:id', (req, res) => {
-  const id = req.params.id;
-  
-  Blog.findByIdAndDelete(id)
-    .then(result => {
-      res.json({ redirect: '/blogs' });
     })
     .catch(err => {
       console.log(err);

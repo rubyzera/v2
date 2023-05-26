@@ -36,7 +36,6 @@ controller.getComanda = async function (req, res) {
 
 controller.criarComanda = async function (req, res) {
     try {
-        //   check data has already been created
         const checarComanda = await model.comanda.findAll({
         where: {
             [Op.or]: {
