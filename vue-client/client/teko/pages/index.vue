@@ -19,7 +19,7 @@
    </form>
    <div class="comanda-container">
      <ul>
-       <li v-for="(comanda, i) in comandas" :key="comanda._id">
+       <li v-for="(comanda, i) in comandas" :key="comanda.numero">
          <div class="comanda">
          <span class="comanda-numero">{{ comanda.numero }}</span>
          <span class="comanda-itens">{{  comanda.itens }}</span>
