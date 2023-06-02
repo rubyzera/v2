@@ -38,14 +38,14 @@ describe("Testes para o endpont de exemplo", () => {
                                 .set('Accept', 'text/plain')
                                 .set('Content-Type', 'text/plain')
                                 .send(dataToSend); //envia dados para o servidor
-        expect(response.statusCode).toBe(404);
+        expect(response.statusCode).toBe(200);
     });
 
     test("Teste de Requisição DELETE", async () => {
         const response = await request(app)
             .delete("/api/comandaList")
             .set('Accept', 'text/plain')
-        expect(response.statusCode).toBe(404);
+        expect(response.statusCode).toBe(200);
         // expect(response.text).toBe("Retorno do callback para DELETE");
     });
 })
