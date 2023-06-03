@@ -5,11 +5,11 @@ const router = Router()
 
 router.get('/', async (req, res) => {
     try {
-        const funcionarioList = await Funcionario.findOne({
+        const funcList = await Funcionario.findOne({
             numero: 2
         });
-        if (!funcionarioList) throw new Error('Nenhum funcionario encontrado')
-        res.status(200).json(funcionarioList)
+        if (!funcList) throw new Error('Nenhum funcionario encontrado')
+        res.status(200).json(funcList)
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: error.message })

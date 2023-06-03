@@ -22,6 +22,7 @@
        <li v-for="(comanda, i) in comandas" :key="comanda.numero">
          <div class="comanda">
          <span class="comanda-numero">{{ comanda.numero }}</span>
+         <!-- <span class="comanda-numero">{{ comanda.numero }}</span> -->
          <span class="comanda-itens">{{  comanda.itens }}</span>
          <span class="comanda-valor">{{ comanda.valor }}</span>
        </div>
@@ -54,8 +55,10 @@ export default {
   },
   async mounted() {
     const response = await this.$axios.$get("api/comandaList/");
-    console.log(response);
-    this.comandas = response;
+    console.log(JSON.stringify(response));
+    // let ok = [];
+    // ok.pu
+    this.comandas.push(response);
   },
   methods: {
     async addComanda(e) {

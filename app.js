@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // rotas
 app.use('/api/comandaList', ComandaListRoutes)
-app.use('/api/funcionarioList,', FuncionarioListRoutes)
+app.use('/api/funcList,', FuncionarioListRoutes)
 app.use('/api/estoqueList', EstoqueListRoutes)
 
 

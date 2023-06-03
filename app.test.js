@@ -2,14 +2,11 @@ const app = require("./app");
 const request = require("supertest");
 
 describe("Testes para o endpont de exemplo", () => {
-    // podemos definir um callback async já que a mesma retorna async
     test("Teste de Requisição GET", async () => {
         const response = await request(app)
                                 .get("/api/comandaList")
                                 .accept("Accept", "text/plain");
         expect(response.statusCode).toBe(200);
-        // expect(response.text)
-        //     .toBe("Retorno do callback para GET");
     });
 
     test("Teste de Requisição GET JSON", async () => {
@@ -17,7 +14,6 @@ describe("Testes para o endpont de exemplo", () => {
                            .get("/api/comandaList")
                            .set('Accept', 'application/json')
         expect(response.statusCode).toBe(200);
-        // expect(response.body).toEqual({ nome: "Marcio", idade: 35 });
     });
 
     test("Teste de Requisição POST", async () => {
@@ -28,7 +24,6 @@ describe("Testes para o endpont de exemplo", () => {
             .set('Content-Type', 'text/plain')
             .send(dataToSend); //envia dados para o servidor
         expect(response.statusCode).toBe(200);
-        // expect(response.text).toBe("Retorno do callback para POST. Info: " + dataToSend);
     });
 
     test("Teste de Requisição PUT", async () => {
@@ -46,7 +41,6 @@ describe("Testes para o endpont de exemplo", () => {
             .delete("/api/comandaList")
             .set('Accept', 'text/plain')
         expect(response.statusCode).toBe(200);
-        // expect(response.text).toBe("Retorno do callback para DELETE");
     });
 })
 

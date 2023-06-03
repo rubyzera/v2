@@ -45,18 +45,17 @@
           nome:"",
           senha:""
         }],
-        
-        nome: "",
-        senha: "",
       };
     },
-    // async mounted() {
-    //   const response = await this.$axios.$get("api/funcList/");
-    //   console.log(response);
-    //   this.funcs = response;
-    // },
-    methods: {
-      async addfunc(e) {
+    async mounted() {
+    const response = await this.$axios.$get("api/funcList/");
+    console.log(JSON.stringify(response));
+    // let ok = [];
+    // ok.pu
+    this.funcionarios.push(response);
+    },
+  methods: {
+      async addFunc(e) {
         e.preventDefault();
         const response = await this.$axios.$post("api/funcList/", {
           nome: this.nome,

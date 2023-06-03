@@ -35,8 +35,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
-    '@nuxtjs/axios'    
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'    
   ],
+
+  auth: {
+
+  },
 
   axios: {
     baseURL: 'http://localhost:4000', // Used as fallback if no runtime config is provided
