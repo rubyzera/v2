@@ -6,7 +6,7 @@ const router = Router()
 router.get('/', async (req, res) => {
     try {
         const funcList = await Funcionario.findOne({
-            numero: 2
+            id: 1
         });
         if (!funcList) throw new Error('Nenhum funcionario encontrado')
         res.status(200).json(funcList)

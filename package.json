@@ -10,7 +10,7 @@
     "test": "node node_modules/jest/bin/jest.js",
     "start": "node server.js",
     "start:server": "nodemon app.js --ignore 'vue-client/client/teko/'",
-    "start:client": "npm run serve --prefix vue-client/client/teko/",
+    "start:client": "npm run dev 'vue-client/client/teko/'",
     "dev": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
   "author": "",

@@ -9,16 +9,16 @@ const FuncionarioListRoutes = require('./routes/api/funcionario');
 const bodyParser = require('body-parser');
 const app = express(); //Utilizando o app "express"
 const database = require("./sqlite");
-// (async () => {
-// try {
-//   const resultado = await database.sync();
-//   console.log(resultado);
-// } catch (error) {
-//   console.log(error);
-// }
+ (async () => {
+ try {
+   const resultado = await database.sync();
+  //  console.log(resultado);
+ } catch (error) {
+   console.log(error);
+ }
 
-// })();
-// app.listen(4000);
+ })();
+ app.listen(4000);
 
 
 app.set('view engine', 'ejs'); //Utilizando o app "ejs"
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // rotas
 app.use('/api/comandaList', ComandaListRoutes)
-app.use('/api/funcList,', FuncionarioListRoutes)
+app.use('/api/funcList', FuncionarioListRoutes)
 app.use('/api/estoqueList', EstoqueListRoutes)
 
 
